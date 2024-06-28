@@ -9,13 +9,13 @@ export class WebSocketService extends CallIdMethods {
     private socket: WebSocket | null = null;
     private callbackMessage: callbackMessage | null = null;
     private heartbeatCounter = 0;
-    private loginId: String | null;
+    private callId: String | null;
 
     public connect(callbackMessage: callbackMessage): void {
         this.socket = new WebSocket(import.meta.env.VITE_APP_WEB_SOCKET_URL, ["wamp"]);
 
         this.callbackMessage = callbackMessage;
-        this.loginId = this.getCallId();
+        this.callId = this.getCallId();
 
         this.socket.onopen = () => {
             let self = this;
@@ -44,7 +44,7 @@ export class WebSocketService extends CallIdMethods {
     private heartbeat(self): void {
         self.call([
             MessageType.Heartbeat,
-            this.loginId,
+            this.callId,
             this.heartbeatCounter
         ]);
         this.heartbeatCounter++;

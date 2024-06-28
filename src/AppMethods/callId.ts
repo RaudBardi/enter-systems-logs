@@ -2,15 +2,15 @@ import { getId } from "@/utils/uuid";
 
 export class CallIdMethods {
   private state = {
-    loginId: getId(),
+    callId: getId(),
   };
 
   public updateLoginId(): string {
-    this.state.loginId = getId();
-    return this.state.loginId;
+    this.state.callId = getId();
+    return this.state.callId;
   }
 
   public getCallId(): string {
-    return this.state.loginId;
+    return this.state.callId;
   }
 }
